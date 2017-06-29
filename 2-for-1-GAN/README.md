@@ -1,3 +1,3 @@
-#2-for-1 GAN
+# 2-for-1 GAN
 
 Computationally efficient Generative Adversarial Network.
