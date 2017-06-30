@@ -1,19 +1,54 @@
 import tensorflow as tf
-slim = tf.contrim.slim
+import numpy as np
+from cifar10_data import *
+slim = tf.contrib.slim
 
 def get_cifar10_quick(inputs):
-    with tf.variable_scope(scope, 'vgg_a', [inputs]) as sc:
+    with tf.variable_scope('cifarquick', 'vgg_a', [inputs]) as sc:
         with slim.arg_scope([slim.conv2d, slim.fully_connected],
-                            weights_initializer=tf.constate_initializer(0.0),
-                            activation=False):
+                            weights_initializer=tf.constant_initializer(0.0),
+                            activation_fn=None):
             net = slim.conv2d(inputs, 32, [5, 5], stride=1, padding='SAME',scope='conv1')
-            net = slim.pool2d(net, [3, 3], stride=2, scope='pool1')
+            net = slim.max_pool2d(net, [3, 3], stride=2, scope='pool1')
             net = tf.nn.relu(net)
             net = slim.conv2d(net, 32, [5, 5], stride=1, padding='SAME',scope='conv2')
             net = tf.nn.relu(net)
-            net = slim.pool2d(net, [3, 3], stride=2, scope='pool2') 
-            net = slim.conv2d(net, 64, [5, 5], stride=1, padding='SAME',scope='conv3')
+            net = slim.max_pool2d(net, [3, 3], stride=2, scope='pool2') 
+            net = slim.conv2d(net, 64, [5, 5], stride=1, padding='VALID',scope='conv3')
             net = tf.nn.relu(net)
-            net = slim.pool2d(net, [3, 3], stride=2, scope='pool3') 
+            net = slim.max_pool2d(net, [3, 3], stride=2, scope='pool3') 
             net = slim.stack(net, slim.fully_connected, [64, 10], scope='fc')
+            net = tf.squeeze(net,[1,2])
     return net
+
+def train(inputs, labels):
+    predictions = get_cifar10_quick(inputs)
+    loss = slim.losses.softmax_cross_entropy(predictions, labels)
+    optimizer = tf.train.GradientDescentOptimizer(0.1)
+    train_op = slim.learning.create_train_op(loss, optimizer)
+    logdir = 'cifar10_logs'
+
+    slim.learning.train(
+        train_op,
+        logdir,
+        number_of_steps=10,
+        save_summaries_secs=300,
+        save_interval_secs=600)
+
+    return 'train successful'
+
+
+def main():
+    with tf.Session() as sess:
+        batch_size = 10
+        data = Cifar10Data(batch_size=batch_size)
+        train_idx = 0 - batch_size
+        inputs = tf.placeholder(tf.float32, shape=(10, 32, 32, 3))
+        labels = tf.placeholder(tf.float32, shape=(10, 10))
+        
+        train_idx = train_idx + batch_size
+        x, y = data.get_train_batch(train_idx, batch_size)
+        res = sess.run(train(inputs,labels), feed_dict={inputs:x.astype(float32), labels: y.astype(float32)})
+
+if __name__ == '__main__':
+    main()
