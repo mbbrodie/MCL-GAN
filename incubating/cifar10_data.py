@@ -14,12 +14,12 @@ This class stores an index, shuffles the data, and loads the next batch
 class Cifar10Data():
     def __init__(self, batch_size=50):
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
-        x_train = self.reshape(x_train)
-        x_test = self.reshape(x_test)
+        #x_train = self.reshape(x_train) # weird bug on mac, no need to reshape
+        #x_test = self.reshape(x_test)
         y_train = self.to_one_hot(y_train)
         y_test = self.to_one_hot(y_test)
-        self.train = (x_train, y_train)
-        self.test = (x_test, y_test)
+        self.train = (x_train / 255.0, y_train)
+        self.test = (x_test / 255.0, y_test)
 
     def to_one_hot(self, labels):
         one_hot = np.zeros((labels.shape[0], 10))
