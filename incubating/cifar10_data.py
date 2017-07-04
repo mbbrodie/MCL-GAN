@@ -14,11 +14,14 @@ This class stores an index, shuffles the data, and loads the next batch
 class Cifar10Data():
     def __init__(self, batch_size=50):
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
-        #x_train = self.reshape(x_train) # weird bug on mac, no need to reshape
-        #x_test = self.reshape(x_test)
+        x_train = self.reshape(x_train) # weird bug on mac, no need to reshape
+        x_train = x_train / 255.0
+        #mean centering x_train
+        x_train = x_train - x_train.mean(0) 
+        x_test = self.reshape(x_test)
         y_train = self.to_one_hot(y_train)
         y_test = self.to_one_hot(y_test)
-        self.train = (x_train / 255.0, y_train)
+        self.train = (x_train, y_train)
         self.test = (x_test / 255.0, y_test)
 
     def to_one_hot(self, labels):
@@ -31,9 +34,12 @@ class Cifar10Data():
 
     def shuffle_train(self):
         self.train_idx = 0
-        shuffle_idx = np.random.shuffle(np.arange(50000))
-        self.train[0] = self.train[0][shuffle_idx]
-        self.train[1] = self.train[1][shuffle_idx]
+        shuffle_idx = np.arange(50000)
+        np.random.shuffle(shuffle_idx)
+        train = self.train[0]
+        x_train = self.train[0][shuffle_idx]
+        y_train = self.train[1][shuffle_idx]
+        self.train = (x_train, y_train)
 
     def get_train_batch(self, train_idx, batch_size):
         images, labels = self.train[0][train_idx:train_idx+batch_size], self.train[1][train_idx:train_idx+batch_size]

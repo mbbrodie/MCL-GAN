@@ -107,9 +107,10 @@ class EnsDis(object):
 
     def train(self):
         with tf.Session() as sess:
-            init = tf.global_variables_initializer()
+            #init = tf.global_variables_initializer()
             saver = tf.train.Saver()
-            sess.run(init)
+            saver.restore(sess, "snapshots/5000/cifar_5000.ckpt")
+            #sess.run(init)
             #create ensemble
             #load cifar_data
             data = Cifar10Data(batch_size=self.batch_size)
@@ -117,7 +118,7 @@ class EnsDis(object):
             m1_labels = np.tile(np.asarray([1,0]), (self.batch_size,1)) #switch out 10 for self.batch_size once it's working
             m2_labels = np.tile(np.asarray([0,1]), (self.batch_size,1))
             train_idx = 0
-            for step in xrange(500):
+            for step in xrange(50):
                 #load batch
                 batch_inputs, batch_labels = data.get_train_batch(train_idx, self.batch_size) 
                 #train ensemble models separately
@@ -145,7 +146,7 @@ class EnsDis(object):
                 if train_idx * self.batch_size > 50000:
                     data.shuffle_train()
                     train_idx = 0
-            save_path = saver.save(sess, "snapshots/5000/cifar_5000.ckpt")
+            save_path = saver.save(sess, "snapshots/5001/cifar_5000.ckpt")
                 
                 
             
@@ -161,7 +162,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--learning-rate', type=float, default=0.00001,
                         help='the learning rate for optimization weight updates')
-    parser.add_argument('--batch-size', type=int, default=250,
+    parser.add_argument('--batch-size', type=int, default=50,
                         help='the size of a single training batch')
 
     return parser.parse_args()
