@@ -1,0 +1,9 @@
+experiment_name:test_exp
+loss_save_dir:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/loss_results/testgrad/
+model_save_dir:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/saved_models/testgrad/
+save_after_n_iter:10
+path:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/ttt_half.csv
+layer_params:[(30,500),(500,250),(250,100),(100,50),(50,27)]
+lr:.01
+n_iter:500
+batch_size:100

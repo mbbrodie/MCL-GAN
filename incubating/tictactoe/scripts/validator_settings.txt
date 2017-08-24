@@ -1,0 +1,10 @@
+experiment_name:test_exp
+loss_save_dir:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/loss_results/valid/
+model_save_dir:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/saved_models/valid/
+load_weights_path:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/saved_models/valid/iter0.pkl
+save_after_n_iter:1
+path:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/validator_train.csv
+layer_params:[(27,100),(100,200),(200,1)]
+lr:.01
+n_iter:3
+batch_size:1

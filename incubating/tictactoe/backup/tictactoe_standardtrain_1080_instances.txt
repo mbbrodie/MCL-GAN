@@ -1,0 +1,19 @@
+this model trained on the 1080 instance standard tictactoe dataset.
+
+Here are the final parameters:
+experiment_name:test_exp
+loss_save_dir:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/loss_results/testTTT2/
+model_save_dir:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/saved_models/testTTT2/
+load_weights_path:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/saved_models/testTTT2/iter950.pkl
+save_after_n_iter:50
+path:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/tictactoe_standardized_processed.csv
+layer_params:[(30,100),(100,200),(200,27)]
+lr:.00001
+n_iter:1000
+batch_size:1
+
+
+We reran this experiment first at .001 (3x), then .0001 (2x), then .00001 (2x)
+for a total of 5000 iterations through the entire dataset.
+
+The total complee accuracy is 65% (i.e. 27/27 correct). However, most of the others get 26/27.

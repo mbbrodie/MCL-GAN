@@ -1,0 +1,21 @@
+{'save_after_n_iter': '50', 'loss_save_dir': '/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/loss_results/testTTT2/', 'n_iter': '1000', 'model_save_dir': '/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/saved_models/testTTT2/', 'batch_size': '1', 'layer_params': '[(30,100),(100,200),(200,27)]', 'experiment_name': 'test_exp', 'lr': '.00001', 'path': '/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/tictactoe_standardized_processed.csv', 'load_weights_path': '/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/saved_models/testTTT2/iter950.pkl'}
+iter 0: 1.37944984168
+iter 50: 0.981623117138
+iter 100: 0.373829857038
+iter 150: 0.495313667424
+iter 200: 0.31819843906
+iter 250: 0.150408058315
+iter 300: 0.861458180238
+iter 350: 0.67365054662
+iter 400: 2.87027461589
+iter 450: 1.36758218171
+iter 500: -0.0598538476139
+iter 550: -0.0151138061755
+iter 600: 1.89826559992
+iter 650: 0.556550963275
+iter 700: 1.04867769865
+iter 750: 0.90000830736
+iter 800: 1.90930268774
+iter 850: 0.335381657846
+iter 900: 1.03477983454
+iter 950: 1.56746905524
