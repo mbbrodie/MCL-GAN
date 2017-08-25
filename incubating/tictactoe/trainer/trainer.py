@@ -27,9 +27,9 @@ class BasicTrainer:
                 # print curr_loss
                 #import sys; sys.exit()
                 grad = loss.compute_gradient(output,Y)
-                model.do_gradient_descent(output, X, Y, lr, grad)                
-            metric.report(data, model, settings)
+                model.do_gradient_descent(output, X, Y, lr, grad)                            
             if saver.is_save_iter():
+                metric.report(data, model, settings)
                 saver.save_loss(curr_loss)
                 saver.save_model(model)
             saver.increment_iter()

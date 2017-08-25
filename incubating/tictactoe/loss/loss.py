@@ -24,6 +24,7 @@ class CrossEntropyLoss:
         #print 'y_act', y_actual  
         # print 'gradient!'  
         self.grad = (y_in - y_actual) / y_in.shape[0]
+        print self.grad
         self.count = self.count + 1
         # if self.count % 1000 == 0:
         # # if True:

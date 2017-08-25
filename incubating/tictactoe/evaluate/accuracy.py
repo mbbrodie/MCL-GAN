@@ -13,8 +13,12 @@ class Accuracy:
 
 
 	def eval_multiclass(self, y_true, y_pred):
-		y_pred[y_pred <= 0] = 0
-		y_pred = np.floor(y_pred/y_pred.max(axis=1)[:,None])
+		y_pred[y_pred <= 0] = 0		
+		if np.count_nonzero(y_pred) > 1:
+			y_pred = np.floor(y_pred/y_pred.max(axis=1)[:,None])
+		else:	
+			y_pred[:] = 0
+		print y_pred
 		return accuracy_score(y_true, y_pred)
 
 	def eval_TTT(self, y_true, y_pred):
