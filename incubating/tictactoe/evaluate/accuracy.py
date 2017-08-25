@@ -17,8 +17,7 @@ class Accuracy:
 		if np.count_nonzero(y_pred) > 1:
 			y_pred = np.floor(y_pred/y_pred.max(axis=1)[:,None])
 		else:	
-			y_pred[:] = 0
-		print y_pred
+			y_pred[:] = 0		
 		return accuracy_score(y_true, y_pred)
 
 	def eval_TTT(self, y_true, y_pred):
