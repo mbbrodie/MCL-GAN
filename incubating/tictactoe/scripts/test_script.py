@@ -12,16 +12,17 @@ from loss.loss import *
 from evaluate.accuracy import Accuracy
 
 
-s = ExperimentSettings('test_settings.txt')
+s = ExperimentSettings('test_settings_iris.txt')
 d = Dataset(s)
 l = CrossEntropyLoss()
 m = MLP(s)
 res = Saver(s)
 t = BasicTrainer()
+e = Accuracy('multiclass')
+t.train(s,m,d,res,l,e)
+e.report(d, m, s)
 
-t.train(s,m,d,res,l)
-e = Accuracy()
-print e.eval(d.Y,m.compute(d.X))
+
 
 # train(self, settings, model, data, saver, loss):  
 

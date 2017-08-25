@@ -7,9 +7,9 @@ class CrossEntropyLoss:
     def measure(self, y_in, y_actual):
         """Because we can have 3 possible outputs: x,o,b, we want 3 output vectors predicted x [111000000] o [000010100] and b [000101011]"""
         # print 'measure y_in'
-        print 'yactual, yin'        
-        print yactual
-        print y_in
+        # print 'yactual, yin'        
+        # print yactual
+        # print y_in
         #print y_in
         #self.probs = np.exp(y_in) / np.sum(np.exp(y_in), axis=1, keepdims=True) # keep this for other types of predictions
         self.probs = y_in

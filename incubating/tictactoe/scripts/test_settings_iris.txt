@@ -1,9 +1,9 @@
 experiment_name:test_exp
 loss_save_dir:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/loss_results/test/
 model_save_dir:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/saved_models/test/
-save_after_n_iter:1
+save_after_n_iter:500
 path:/Users/mike/Documents/ml_lab/phd/proposal/code/MCL-GAN/incubating/tictactoe/iris_onehot.csv
 layer_params:[(4,50),(50,20),(20,15),(15,3)]
-lr:.007
-n_iter:500
+lr:.01
+n_iter:100
 batch_size:1

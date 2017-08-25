@@ -7,7 +7,7 @@ class BasicTrainer:
     def __init__(self):
         pass        
 
-    def train(self, settings, model, data, saver, loss):        
+    def train(self, settings, model, data, saver, loss, metric):        
         lr = float(settings.lr)
         for iter in range(0, int(settings.n_iter)):
             if iter % 10000 == 0 and iter > 0:                
@@ -28,6 +28,7 @@ class BasicTrainer:
                 #import sys; sys.exit()
                 grad = loss.compute_gradient(output,Y)
                 model.do_gradient_descent(output, X, Y, lr, grad)                
+            metric.report(data, model, settings)
             if saver.is_save_iter():
                 saver.save_loss(curr_loss)
                 saver.save_model(model)

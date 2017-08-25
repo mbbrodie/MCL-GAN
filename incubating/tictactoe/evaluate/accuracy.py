@@ -29,6 +29,17 @@ class Accuracy:
 		y_pred[y_pred > .5] = 1
 		return accuracy_score(y_true, y_pred)
 
-	def report(self, y_true, y_pred):
+	def report(self, data, model, settings):
+		data.shuffle() 
+		metric = 0
+		n_batches = 0
+		while data.has_batch(settings.batch_size): 
+			n_batches = n_batches + 1
+			X,y_true = data.next_batch(settings.batch_size)
+			y_pred = model.compute(X)
+			metric = metric + self.eval_f(y_true, y_pred)
 		print self.name
-		print self.eval_f(y_true, y_pred)
+		print 1.0 * metric / n_batches
+
+
+		

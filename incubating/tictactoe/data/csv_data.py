@@ -5,7 +5,8 @@ import random
 class Dataset:
 	def __init__(self, settings): 
 		self.load_data(settings)
-		self.index = 0		
+		self.index = 0
+		self.valid_index = 0		
 
 	def load_data(self, settings):
 		if '.pkl' in settings.path:
@@ -50,6 +51,11 @@ class Dataset:
 		Y = self.Y[self.indexing[self.index:self.index+batch_size]]
 		self.index = self.index + batch_size
 		return X,Y
+
+	def sample_batch(self, batch_size):
+		idx = range(batch_size)
+		random.shuffle(idx)
+		return self.X[idx], self.Y[idx]
 
 	def shuffle(self):
 		random.shuffle(self.indexing)

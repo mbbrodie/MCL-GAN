@@ -19,9 +19,18 @@ l = CrossEntropyLoss()
 m = MLP(s)
 res = Saver(s)
 t = BasicTrainer()
-e = Accuracy()
-t.train(s,m,d,res,l)
-print e.eval(d.Y,m.compute(d.X))
+e = Accuracy('binary')
+t.train(s,m,d,res,l,e)
+e.report(d, m, s)
+# import gc
+# gc.collect()
+# y_pred = m.compute(d.X)
+# y_pred[y_pred <= .5] = 0
+# y_pred[y_pred > .5] = 1
+# print y_pred
+# y_true = d.Y
+# from sklearn.metrics import accuracy_score	
+# print accuracy_score(y_true, y_pred)
 
 
 #print m.compute(d.X)
